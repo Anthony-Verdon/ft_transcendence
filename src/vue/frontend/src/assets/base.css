@@ -1,0 +1,91 @@
+@import url('https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&display=swap');
+
+.image.is-256x256 {
+  width: 256px;
+  height: 256px;
+}
+
+body {
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.box a {
+  color: #4a4a4a;
+}
+
+.box a:hover {
+  color: #4a4a4a;
+}
+
+@keyframes dots {
+  0% {
+    content: '';
+  }
+  25% {
+    content: '.';
+  }
+  50% {
+    content: '..';
+  }
+  75% {
+    content: '...';
+  }
+  100% {
+    content: '';
+  }
+}
+
+.dots-animation::after {
+  content: '';
+  animation: dots 1.2s infinite;
+}
+
+/*PongViews */
+#canva {
+  padding: 0;
+  margin: auto;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*MatchHistoryViews*/
+#history {
+  height: 60vh;
+  overflow: auto;
+}
+
+#piechart {
+  margin-left: 7vw;
+  margin-top: 5vh;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

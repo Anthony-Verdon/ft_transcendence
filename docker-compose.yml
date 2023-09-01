@@ -1,0 +1,66 @@
+version: '3'
+services:
+    nestjs:
+        container_name: nestjs
+        build:
+          context: ./src/nestjs
+          target: development
+        image: nestjs
+        ports:
+         - 3000:3000
+        volumes:
+         - ./src/nestjs/backend:/app/backend
+        networks:
+         - back-end
+        depends_on:
+         - postgres
+        env_file: ./.env
+        restart: unless-stopped
+    postgres:
+        container_name: postgres
+        image: postgres:15-alpine
+        networks:
+         - back-end
+        volumes:
+         - postgres:/var/lib/postgresql/data
+        env_file: ./.env
+        restart: unless-stopped
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4:latest
+        ports:
+         - 5050:80
+        volumes:
+         - pgadmin:/var/lib/pgadmin
+        networks:
+         - back-end
+        logging:
+          driver: none
+        depends_on:
+         - postgres
+        env_file: ./.env
+        restart: unless-stopped
+    vue:
+        container_name: vue
+        build:
+          context: ./src/vue
+          target: development
+        image: vue
+        ports:
+         - 8080:8080
+        volumes:
+         - ./src/vue/frontend:/app/frontend
+        networks:
+          - front-end
+        depends_on:
+         - nestjs
+        env_file: ./.env
+        restart: unless-stopped
+volumes:
+    pgadmin:
+    postgres:
+networks:
+    back-end:
+      driver: bridge
+    front-end:
+      driver: bridge
